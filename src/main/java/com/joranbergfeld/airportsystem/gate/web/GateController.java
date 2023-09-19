@@ -1,6 +1,12 @@
-package com.joranbergfeld.airportsystem.gate;
+package com.joranbergfeld.airportsystem.gate.web;
 
+import com.joranbergfeld.airportsystem.gate.Gate;
+import com.joranbergfeld.airportsystem.gate.GateService;
+import com.joranbergfeld.airportsystem.gate.web.exception.GateOccupiedException;
+import com.joranbergfeld.airportsystem.gate.web.request.OccupyGateRequest;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,8 +32,8 @@ public class GateController {
     }
 
     @PostMapping
-    public Gate createGate(@Valid @RequestBody Gate gate) {
-        return gateService.storeGate(gate);
+    public ResponseEntity<Gate> createGate(@Valid @RequestBody Gate gate) {
+        return new ResponseEntity<>(gateService.storeGate(gate), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
@@ -38,5 +44,10 @@ public class GateController {
     @DeleteMapping("/{id}")
     public Gate deleteGate(@PathVariable("id") Long id) {
         return gateService.deleteGate(id);
+    }
+
+    @PostMapping("/{id}/occupy")
+    public Gate occupyGate(@PathVariable("id") Long id, @Valid @RequestBody OccupyGateRequest occupyGateRequest) {
+        return gateService.occupyGate(id, occupyGateRequest.getOccupyingEntityId());
     }
 }

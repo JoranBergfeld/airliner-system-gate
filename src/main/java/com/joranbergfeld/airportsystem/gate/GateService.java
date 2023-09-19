@@ -1,6 +1,8 @@
 package com.joranbergfeld.airportsystem.gate;
 
 
+import com.joranbergfeld.airportsystem.gate.web.exception.GateOccupiedException;
+import com.joranbergfeld.airportsystem.gate.web.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,5 +45,15 @@ public class GateService {
                     gate.setActive(false);
                     return gateRepository.save(gate);
                 }).orElseThrow(() -> new ResourceNotFoundException("Gate not found with id " + id));
+    }
+
+    public Gate occupyGate(Long id, Long occupyingEntityId) {
+        Gate gate = gateRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Gate not found with id " + id));
+        if (gate.isOccupied()) {
+            throw new GateOccupiedException();
+        }
+        gate.setOccupied(true);
+        gate.setEntityId(occupyingEntityId);
+        return gateRepository.save(gate);
     }
 }
