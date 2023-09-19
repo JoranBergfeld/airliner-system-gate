@@ -26,6 +26,11 @@ public class GateController {
         return gateService.getActiveGates();
     }
 
+    @GetMapping("/vacant")
+    public List<Gate> getVacantGates() {
+        return gateService.getVacantGates();
+    }
+
     @GetMapping("/{id}")
     public Gate getGateById(@PathVariable("id") Long id) {
         return gateService.findById(id);

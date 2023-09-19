@@ -7,4 +7,5 @@ import java.util.List;
 public interface GateRepository extends JpaRepository<Gate, Long> {
 
     List<Gate> findAllByActiveTrue();
+    List<Gate> findAllByActiveTrueAndOccupiedFalse();
 }

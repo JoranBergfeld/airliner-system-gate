@@ -56,4 +56,8 @@ public class GateService {
         gate.setEntityId(occupyingEntityId);
         return gateRepository.save(gate);
     }
+
+    public List<Gate> getVacantGates() {
+        return gateRepository.findAllByActiveTrueAndOccupiedFalse();
+    }
 }
