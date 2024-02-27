@@ -55,4 +55,9 @@ public class GateController {
     public Gate occupyGate(@PathVariable("id") Long id, @Valid @RequestBody OccupyGateRequest occupyGateRequest) {
         return gateService.occupyGate(id, occupyGateRequest.getOccupyingEntityId());
     }
+
+    @PostMapping("/{id}/free")
+    public Gate freeGate(@PathVariable("id") Long id) {
+        return gateService.freeGate(id);
+    }
 }

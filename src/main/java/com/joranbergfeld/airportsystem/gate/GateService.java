@@ -57,6 +57,13 @@ public class GateService {
         return gateRepository.save(gate);
     }
 
+    public Gate freeGate(Long id) {
+        Gate gate = gateRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Gate not found with id " + id));
+        gate.setOccupied(false);
+        gate.setOccupyingEntityId(null);
+        return gateRepository.save(gate);
+    }
+
     public List<Gate> getVacantGates() {
         return gateRepository.findAllByActiveTrueAndOccupiedFalse();
     }
