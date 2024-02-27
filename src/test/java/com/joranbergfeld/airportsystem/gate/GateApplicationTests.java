@@ -51,7 +51,7 @@ class GateApplicationTests {
         assertEquals(200, occupyGateResponse.getStatusCode().value(), "Should respond with 200 status code.");
         assertNotNull(occupyGateResponse.getBody(), "Should not respond with empty body.");
         assertTrue(occupyGateResponse.getBody().isOccupied(), "Gate should be occupied.");
-        assertEquals(123L, occupyGateResponse.getBody().getEntityId(), "Gate should have the correct entity ID.");
+        assertEquals(123L, occupyGateResponse.getBody().getOccupyingEntityId(), "Gate should have the correct entity ID.");
 
         restTemplate.setErrorHandler(new ResponseErrorHandler() {
             @Override

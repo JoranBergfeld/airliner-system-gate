@@ -53,7 +53,7 @@ public class GateService {
             throw new GateOccupiedException();
         }
         gate.setOccupied(true);
-        gate.setEntityId(occupyingEntityId);
+        gate.setOccupyingEntityId(occupyingEntityId);
         return gateRepository.save(gate);
     }
 

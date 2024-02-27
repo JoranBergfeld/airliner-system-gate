@@ -16,7 +16,7 @@ public class Gate {
     /**
      * Entity ID which may or may not have reserved this gate.
      */
-    private Long entityId;
+    private Long occupyingEntityId;
 
     /**
      * Marks the gate unusable due to it being occupied.
@@ -48,12 +48,12 @@ public class Gate {
         this.size = size;
     }
 
-    public Long getEntityId() {
-        return entityId;
+    public Long getOccupyingEntityId() {
+        return occupyingEntityId;
     }
 
-    public void setEntityId(Long entityId) {
-        this.entityId = entityId;
+    public void setOccupyingEntityId(Long entityId) {
+        this.occupyingEntityId = entityId;
     }
 
     public boolean isOccupied() {
